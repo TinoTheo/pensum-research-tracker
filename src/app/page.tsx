@@ -29,7 +29,7 @@ export default function Home() {
     );
   }
 
-  // Route based on user role
+  // send to the right dashboard based on who they are
   if (user.role === 'admin') {
     return <AdminDashboard />;
   }

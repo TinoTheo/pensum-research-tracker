@@ -11,7 +11,7 @@ export function DemoAuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  // Only run after hydration
+  // wait for hydration before touching localStorage
   useEffect(() => {
     setMounted(true);
     
@@ -32,7 +32,7 @@ export function DemoAuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = useCallback(async (email: string, password: string) => {
     setLoading(true);
     
-    // Simulate network delay
+    // fake network delay to feel like a real login
     await new Promise((resolve) => setTimeout(resolve, 500));
     
     const validatedUser = demoStore.validateCredentials(email, password);

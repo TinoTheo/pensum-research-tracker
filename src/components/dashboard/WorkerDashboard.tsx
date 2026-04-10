@@ -47,7 +47,7 @@ export function WorkerDashboard() {
     }
   };
 
-  // Calculate stats
+  // quick stats for this user
   const stats = {
     total: reports.length,
     inProgress: reports.filter((r) => r.status === 'in-progress').length,
@@ -58,7 +58,7 @@ export function WorkerDashboard() {
   return (
     <SidebarLayout>
       <div className="space-y-4">
-        {/* Page Title */}
+        {/* page header */}
         <div className="border-b pb-3">
           <h2 className="text-xl font-bold">Research Dashboard</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
@@ -66,7 +66,7 @@ export function WorkerDashboard() {
           </p>
         </div>
 
-        {/* Stats Grid - Mobile First */}
+        {/* stats grid - mobile first */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <Card className="border-l-4 border-l-primary">
             <CardContent className="p-3">
@@ -109,9 +109,9 @@ export function WorkerDashboard() {
           </Card>
         </div>
 
-        {/* Main Content Grid - Mobile First */}
+        {/* main content - mobile first */}
         <div className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4">
-          {/* Report Form */}
+          {/* report form */}
           <div className="lg:order-1">
             <div className="mb-2">
               <h3 className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1.5">
@@ -122,7 +122,7 @@ export function WorkerDashboard() {
             <ReportForm onSubmit={handleSubmitReport} />
           </div>
 
-          {/* Report List */}
+          {/* report list */}
           <div className="lg:order-2">
             <div className="mb-2">
               <h3 className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1.5">

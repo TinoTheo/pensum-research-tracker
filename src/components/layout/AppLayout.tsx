@@ -37,7 +37,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
   const { user, signOut } = useDemoAuth();
   const pathname = usePathname();
 
-  // Close drawer on route change
+  // close mobile drawer when navigating
   useEffect(() => {
     setDrawerOpen(false);
   }, [pathname]);
@@ -52,7 +52,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Mobile Backdrop */}
+      {/* mobile drawer backdrop */}
       {drawerOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -64,17 +64,17 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
       <aside
         className={cn(
           'fixed left-0 top-0 z-50 h-screen bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-100 flex flex-col',
-          // Mobile: hidden off-canvas, shown as drawer when open
+          // Mobile: off-canvas drawer
           'translate-x-[-100%] md:translate-x-0',
           drawerOpen && 'translate-x-0',
-          // Tablet: always visible collapsed
+          // Tablet: always collapsed
           'md:w-13 md:w-[52px]',
-          // Desktop: expanded
+          // Desktop: full width
           'lg:w-52',
           collapsed && 'lg:w-13 lg:w-[52px]'
         )}
       >
-        {/* Logo */}
+        {/* logo section */}
         <div className="h-12 flex items-center justify-between px-3 border-b border-sidebar-border">
           {!collapsed && !drawerOpen ? (
             <div className="flex items-center gap-2">
@@ -95,7 +95,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
           </button>
         </div>
 
-        {/* Navigation */}
+        {/* nav menu */}
         <nav className="flex-1 py-3 overflow-y-auto">
           <ul className="space-y-0.5 px-1.5">
             {menuItems.map((item) => {
@@ -122,7 +122,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
           </ul>
         </nav>
 
-        {/* User Profile */}
+        {/* user profile section */}
         <div className="border-t border-sidebar-border p-3">
           {!collapsed && !drawerOpen ? (
             <div className="flex items-center justify-between">
@@ -164,30 +164,30 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/* main content area */}
       <main
         className={cn(
           'flex-1 transition-all duration-100 overflow-x-hidden',
           // Mobile: full width
           'w-full',
-          // Tablet: margin for collapsed sidebar
+          // Tablet: account for collapsed sidebar
           'md:ml-[52px]',
-          // Desktop: margin for expanded sidebar
+          // Desktop: account for expanded sidebar
           'lg:ml-52',
           collapsed && 'lg:ml-[52px]'
         )}
       >
-        {/* Top Bar */}
+        {/* top navigation bar */}
         <header className="fixed top-0 left-0 right-0 h-12 border-b bg-background/95 backdrop-blur z-30 flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            {/* Mobile Hamburger */}
+            {/* mobile menu toggle */}
             <button
               onClick={() => setDrawerOpen(true)}
               className="flex md:hidden w-8 h-8 items-center justify-center text-sidebar-foreground hover:text-sidebar-primary transition-colors"
             >
               <Menu className="w-4 h-4 text-black" />
             </button>
-            {/* Logo/App Name for mobile */}
+            {/* mobile logo */}
             <div className="flex md:hidden items-center gap-2">
        
               <span className="font-bold text-sm">Pensum</span>
@@ -195,7 +195,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
             <h1 className="text-sm font-semibold hidden md:block">Dashboard</h1>
           </div>
           <div className="flex items-center gap-2">
-            {/* User avatar/role badge for mobile */}
+            {/* mobile user info */}
             <div className="flex md:hidden items-center gap-2">
               <div className="w-6 h-6 bg-sidebar-accent flex items-center justify-center">
                 <span className="text-[10px] font-bold">
@@ -213,7 +213,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
           </div>
         </header>
 
-        {/* Page Content */}
+        {/* page content */}
         <div className="pt-12 p-4">
           {children}
         </div>

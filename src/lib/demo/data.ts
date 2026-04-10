@@ -1,6 +1,6 @@
 import { User, Report, FileAttachment } from '@/types';
 
-// Demo users with Shona names
+// demo users with local names
 export const demoUsers: User[] = [
   {
     id: 'admin-001',
@@ -32,7 +32,7 @@ export const demoUsers: User[] = [
   },
 ];
 
-// Demo credentials for easy login
+// quick login shortcuts
 export const demoCredentials = [
   { email: 'tawanda@demo.com', password: 'demo123', role: 'admin', name: 'Tawanda Mutasa' },
   { email: 'chiedza@demo.com', password: 'demo123', role: 'worker', name: 'Chiedza Moyo' },
@@ -40,10 +40,10 @@ export const demoCredentials = [
   { email: 'kuda@demo.com', password: 'demo123', role: 'worker', name: 'Kudakwashe Chiweshe' },
 ];
 
-// Demo file storage (in-memory for demo mode)
+// fake file storage - just for demo
 const fileStore: Map<string, { data: string; type: string; name: string }> = new Map();
 
-// Generate demo reports - Research on problems faced by companies
+// generate some fake research reports
 function generateDemoReports(): Report[] {
   const reports: Report[] = [
     // Chiedza's reports
@@ -220,7 +220,7 @@ function generateDemoReports(): Report[] {
   return reports;
 }
 
-// Demo data store with reactive updates
+// fake reactive data store
 class DemoStore {
   private reports: Report[] = [];
   private initialized = false;
@@ -228,13 +228,14 @@ class DemoStore {
   private allReportsSubscribers: Set<(reports: Report[]) => void> = new Set();
 
   private ensureInitialized() {
+    // don't init twice
     if (!this.initialized) {
       this.reports = generateDemoReports();
       this.initialized = true;
     }
   }
 
-  // Auth
+  // check login
   validateCredentials(email: string, password: string): User | null {
     const cred = demoCredentials.find(
       (c) => c.email === email && c.password === password
@@ -243,7 +244,7 @@ class DemoStore {
     return demoUsers.find((u) => u.email === email) || null;
   }
 
-  // Reports
+  // report helpers
   getUserReports(userId: string): Report[] {
     this.ensureInitialized();
     return this.reports.filter((r) => r.userId === userId);
@@ -292,7 +293,7 @@ class DemoStore {
     return report;
   }
 
-  // File storage
+  // file helpers
   storeFile(fileId: string, data: string, type: string, name: string): void {
     fileStore.set(fileId, { data, type, name });
   }
@@ -301,7 +302,7 @@ class DemoStore {
     return fileStore.get(fileId) || null;
   }
 
-  // Subscriptions
+  // subscription helpers
   subscribeToUserReports(userId: string, callback: (reports: Report[]) => void): () => void {
     this.ensureInitialized();
     if (!this.reportSubscribers.has(userId)) {
@@ -309,7 +310,7 @@ class DemoStore {
     }
     this.reportSubscribers.get(userId)!.add(callback);
     
-    // Initial call
+    // send current data right away
     callback(this.getUserReports(userId));
     
     return () => {
@@ -336,7 +337,7 @@ class DemoStore {
     this.allReportsSubscribers.forEach((cb) => cb(reports));
   }
 
-  // Get all users for admin filter
+  // admin needs user list
   getUsers(): User[] {
     return [...demoUsers];
   }

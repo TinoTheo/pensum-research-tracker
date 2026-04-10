@@ -26,7 +26,7 @@ export function AdminDashboard() {
     return () => unsubscribe();
   }, []);
 
-  // Apply filters client-side
+  // filter reports based on current filter settings
   const filteredReports = useMemo(() => {
     let result = [...reports];
 
@@ -51,7 +51,7 @@ export function AdminDashboard() {
     return result;
   }, [reports, filter]);
 
-  // Calculate stats
+  // quick stats
   const stats = {
     total: reports.length,
     inProgress: reports.filter((r) => r.status === 'in-progress').length,
@@ -75,7 +75,7 @@ export function AdminDashboard() {
   return (
     <SidebarLayout>
       <div className="space-y-4 overflow-x-hidden">
-        {/* Page Title */}
+        {/* page header */}
         <div className="border-b pb-3">
           <h2 className="text-xl font-bold">Supervisor Dashboard</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
@@ -83,7 +83,7 @@ export function AdminDashboard() {
           </p>
         </div>
 
-        {/* KPI Stats Grid - Mobile First */}
+        {/* KPI cards - mobile first */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <Card className="border-l-4 border-l-primary min-h-[80px]">
             <CardContent className="p-3">
@@ -146,10 +146,10 @@ export function AdminDashboard() {
           </Card>
         </div>
 
-        {/* Progress Bar - Mobile First */}
+        {/* progress bar - mobile first */}
         <Card>
           <CardContent className="p-4">
-            {/* Mobile: Stack label and bar vertically */}
+            {/* mobile: stack label and bar */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
               <span className="text-sm font-medium text-muted-foreground">
                 Progress Distribution
@@ -176,7 +176,7 @@ export function AdminDashboard() {
                 </>
               )}
             </div>
-            {/* Mobile: Show percentage below bar */}
+            {/* mobile: show percentage below bar */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
               <div className="text-xs text-muted-foreground sm:hidden">
                 Completion Rate: {completionRate}%
@@ -199,7 +199,7 @@ export function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Reports Table */}
+        {/* reports table */}
         {isLoading ? (
           <Card>
             <CardContent className="flex items-center justify-center h-[300px]">

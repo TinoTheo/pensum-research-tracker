@@ -43,7 +43,7 @@ export function LoginForm() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left Panel - Branding */}
+      {/* branding side panel */}
       <div className="hidden lg:flex lg:w-[400px] bg-sidebar text-sidebar-foreground flex-col justify-between p-8">
         <div>
           <div className="flex items-center gap-2 mb-10">
@@ -65,10 +65,10 @@ export function LoginForm() {
         </div>
       </div>
 
-      {/* Right Panel - Login Form */}
+      {/* login form side */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-sm mx-auto space-y-4">
-          {/* Mobile Logo */}
+          {/* phone logo */}
           <div className="lg:hidden text-center mb-6">
             <div className="inline-flex items-center gap-2 mb-3">
               <Activity className="w-6 h-6 text-primary" />
@@ -139,7 +139,7 @@ export function LoginForm() {
             </CardContent>
           </Card>
 
-          {/* Quick Login Section */}
+          {/* quick login shortcuts */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-[11px] font-medium text-center text-muted-foreground">
