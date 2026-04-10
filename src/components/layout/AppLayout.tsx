@@ -198,7 +198,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
             {/* mobile user info */}
             <div className="flex md:hidden items-center gap-2">
               <div className="w-6 h-6 bg-sidebar-accent flex items-center justify-center">
-                <span className="text-[10px] font-bold">
+                <span className="text-[10px] font-bold text-white">
                   {user?.name.charAt(0)}
                 </span>
               </div>

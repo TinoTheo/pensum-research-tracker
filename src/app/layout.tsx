@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground font-sans`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground font-sans h-100vh`}
       >
         <DemoAuthProvider>
           {children}
