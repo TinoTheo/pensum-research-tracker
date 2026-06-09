@@ -166,7 +166,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
   return (
     <TooltipProvider delayDuration={250}>
-      <div className="min-h-screen bg-background flex">
+      <div className="min-h-dvh bg-background flex">
 
         {/* ── Mobile backdrop ──────────────────────────────────── */}
         {drawerOpen && (
@@ -179,7 +179,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
         {/* ── Sidebar ──────────────────────────────────────────── */}
         <aside
           className={cn(
-            'fixed left-0 top-0 z-50 h-screen bg-sidebar text-sidebar-foreground',
+            'fixed left-0 top-0 z-50 h-dvh bg-sidebar text-sidebar-foreground',
             'border-r border-sidebar-border flex flex-col',
             'sidebar-anim',
             /* Mobile: off-canvas */
@@ -389,7 +389,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
           </header>
 
           {/* Page content */}
-          <div className="pt-14 min-h-screen">
+          <div className="pt-14 min-h-dvh">
             <div className="px-4 md:px-6 py-6 max-w-screen-2xl animate-page-in">
               {children}
             </div>
