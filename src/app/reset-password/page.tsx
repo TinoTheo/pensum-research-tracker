@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Key } from 'lucide-react';
 
-export default function ResetPassword() {
+function ResetPasswordContent() {
   const [token, setToken] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -159,5 +159,13 @@ export default function ResetPassword() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }

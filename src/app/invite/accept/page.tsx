@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
 
-export default function AcceptInvitation() {
+function AcceptInvitationContent() {
   const [token, setToken] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -155,5 +155,13 @@ export default function AcceptInvitation() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function AcceptInvitation() {
+  return (
+    <Suspense>
+      <AcceptInvitationContent />
+    </Suspense>
   );
 }

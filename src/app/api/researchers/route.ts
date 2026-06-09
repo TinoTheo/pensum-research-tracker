@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createUser } from "@/lib/auth";
 
 export async function GET() {
   const users = await prisma.user.findMany({
@@ -9,12 +10,14 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const { name, email, department } = await req.json();
-  if (!name || !email) {
-    return NextResponse.json({ error: "name and email required" }, { status: 400 });
+  const { name, email, password, department } = await req.json();
+  if (!name || !email || !password) {
+    return NextResponse.json({ error: "name, email and password are required" }, { status: 400 });
   }
-  const user = await prisma.user.create({
-    data: { name, email, department },
-  });
-  return NextResponse.json(user, { status: 201 });
+  const user = await createUser(email, password, name, "RESEARCHER");
+  if (department) {
+    await prisma.user.update({ where: { id: user.id }, data: { department } });
+  }
+  const { password: _, ...safe } = user;
+  return NextResponse.json(safe, { status: 201 });
 }

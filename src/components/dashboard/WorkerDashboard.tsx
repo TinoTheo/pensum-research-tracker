@@ -73,7 +73,7 @@ function StatCard({
   accent,
   bg,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   label: string;
   value: number;
   accent: string;

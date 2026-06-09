@@ -84,7 +84,7 @@ function KpiCard({
   bgColor,
   iconColor,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   label: string;
   sublabel: string;
   value: number | string;

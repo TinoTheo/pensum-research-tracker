@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { Status } from "@prisma/client";
 
-const statusToDb: Record<string, string> = {
+const statusToDb: Record<string, Status> = {
   'in-progress': 'IN_PROGRESS',
   'completed': 'COMPLETED',
   'blocked': 'BLOCKED',
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const dbStatus = statusToDb[status] || 'IN_PROGRESS';
+    const dbStatus: Status = statusToDb[status] ?? Status.IN_PROGRESS;
 
     const report = await prisma.report.create({
       data: {
