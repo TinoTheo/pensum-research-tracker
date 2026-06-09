@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  password    String
+  role        UserRole     @default(RESEARCHER)
+  department  String?
+  isActive    Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  invitations Invitation[]
+  reports     Report[]
+}
+
+model Invitation {
+  id         String    @id @default(cuid())
+  email      String
+  role       UserRole
+  token      String    @unique
+  invitedBy  String
+  expiresAt  DateTime
+  acceptedAt DateTime?
+  createdAt  DateTime  @default(now())
+  user       User      @relation(fields: [email], references: [email])
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  title       String
+  problem     String
+  findings    String
+  solutions   String
+  status      Status   @default(IN_PROGRESS)
+  attachments Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum Status {
+  IN_PROGRESS
+  COMPLETED
+  BLOCKED
+}
+
+enum UserRole {
+  ADMIN
+  SUPERVISOR
+  RESEARCHER
+}
